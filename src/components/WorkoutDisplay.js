@@ -3,9 +3,9 @@ import { getDayName } from '../data/workoutTemplate';
 import { getWorkoutByDate } from '../utils/localStorage';
 import './WorkoutDisplay.css';
 
-const WorkoutDisplay = ({ workoutTemplate, selectedDay, selectedDate, onDateChange }) => {
+const WorkoutDisplay = ({ workoutTemplate, selectedDay, selectedDate, onDateChange, currentUser }) => {
   const todaysWorkout = selectedDay && workoutTemplate[selectedDay] ? workoutTemplate[selectedDay] : [];
-  const completedWorkout = getWorkoutByDate(selectedDate);
+  const completedWorkout = getWorkoutByDate(selectedDate, currentUser);
 
   const handleDateChange = (e) => {
     const newDate = new Date(e.target.value + 'T00:00:00');
@@ -77,7 +77,7 @@ const WorkoutDisplay = ({ workoutTemplate, selectedDay, selectedDate, onDateChan
                     <div key={setNum} className="set-info">
                       {setData ? (
                         <>
-                          <div className="weight">{setData.weight || '-'} lbs</div>
+                          <div className="weight">{setData.weight || '-'} kg</div>
                           <div className="reps">{setData.reps || '-'} reps</div>
                         </>
                       ) : (

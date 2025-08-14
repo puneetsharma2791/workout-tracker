@@ -1,17 +1,17 @@
 import React, { useState, useEffect } from 'react';
 import { getDayName } from '../data/workoutTemplate';
-import { saveWorkoutEntry, getWorkoutByDate, getPreviousWeekWorkout } from '../utils/localStorage';
+import { saveWorkoutEntry, getWorkoutByDate, getPreviousWeekWorkout, getLastWorkoutForExercise } from '../utils/localStorage';
 import './WorkoutEntry.css';
 
-const WorkoutEntry = ({ workoutTemplate, selectedDay, selectedDate, onDateChange }) => {
+const WorkoutEntry = ({ workoutTemplate, selectedDay, selectedDate, onDateChange, currentUser }) => {
   const [workoutData, setWorkoutData] = useState([]);
   const [previousWeekData, setPreviousWeekData] = useState(null);
   const [saveStatus, setSaveStatus] = useState('');
 
   useEffect(() => {
     if (selectedDay && workoutTemplate[selectedDay]) {
-      const existingWorkout = getWorkoutByDate(selectedDate);
-      const previousWeek = getPreviousWeekWorkout(selectedDate, selectedDay);
+      const existingWorkout = getWorkoutByDate(selectedDate, currentUser);
+      const previousWeek = getPreviousWeekWorkout(selectedDate, selectedDay, currentUser);
       
       setPreviousWeekData(previousWeek);
       
@@ -31,7 +31,7 @@ const WorkoutEntry = ({ workoutTemplate, selectedDay, selectedDate, onDateChange
         setWorkoutData(initialData);
       }
     }
-  }, [selectedDay, selectedDate, workoutTemplate]);
+  }, [selectedDay, selectedDate, workoutTemplate, currentUser]);
 
   const handleDateChange = (e) => {
     const newDate = new Date(e.target.value + 'T00:00:00');
@@ -47,7 +47,7 @@ const WorkoutEntry = ({ workoutTemplate, selectedDay, selectedDate, onDateChange
   };
 
   const handleSave = () => {
-    saveWorkoutEntry(selectedDate, selectedDay, workoutData);
+    saveWorkoutEntry(selectedDate, selectedDay, workoutData, currentUser);
     setSaveStatus('Workout saved successfully!');
     setTimeout(() => setSaveStatus(''), 3000);
   };
@@ -105,6 +105,16 @@ const WorkoutEntry = ({ workoutTemplate, selectedDay, selectedDate, onDateChange
           <div key={exerciseIndex} className="exercise-entry">
             <h3>{exercise.name}</h3>
             <div className="target-reps">Target: {exercise.targetReps}</div>
+            {getLastWorkoutForExercise(exercise.name, selectedDate, currentUser) && (
+              <div className="last-workout-summary">
+                <strong>Last workout ({getLastWorkoutForExercise(exercise.name, selectedDate, currentUser).date}):</strong>
+                {getLastWorkoutForExercise(exercise.name, selectedDate, currentUser).sets.map((s, idx) => (
+                  <span key={idx} className="last-set">
+                    Set {s.setNumber}: {s.weight}kg × {s.reps} reps
+                  </span>
+                ))}
+              </div>
+            )}
             
             <div className="sets-entry">
               {exercise.sets.map((set, setIndex) => {
@@ -118,13 +128,14 @@ const WorkoutEntry = ({ workoutTemplate, selectedDay, selectedDate, onDateChange
                       <div className="input-wrapper">
                         <input
                           type="number"
-                          placeholder="Weight"
+                          placeholder="Weight (kg)"
                           value={set.weight}
                           onChange={(e) => handleSetChange(exerciseIndex, setIndex, 'weight', e.target.value)}
                           className="weight-input"
+                          step="0.5"
                         />
                         {prevWeight && (
-                          <div className="previous-value">Last: {prevWeight} lbs</div>
+                          <div className="previous-value">Last: {prevWeight} kg</div>
                         )}
                       </div>
                       <div className="input-wrapper">

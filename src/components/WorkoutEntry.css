@@ -44,6 +44,31 @@
   margin-bottom: 15px;
 }
 
+.last-workout-summary {
+  background: #fff3e0;
+  border: 1px solid #ffcc80;
+  border-radius: 5px;
+  padding: 10px;
+  margin-bottom: 15px;
+  font-size: 0.9rem;
+}
+
+.last-workout-summary strong {
+  color: #e65100;
+  display: block;
+  margin-bottom: 8px;
+}
+
+.last-set {
+  display: inline-block;
+  background: #fff;
+  padding: 4px 8px;
+  margin: 2px;
+  border-radius: 3px;
+  border: 1px solid #ffcc80;
+  color: #333;
+}
+
 .sets-entry {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
