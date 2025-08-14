@@ -76,8 +76,30 @@ export const saveWorkoutTemplate = (template, user = 'default') => {
 };
 
 export const getWorkoutTemplate = (user = 'default') => {
-  const template = localStorage.getItem(getUserKey(STORAGE_KEYS.WORKOUT_TEMPLATE, user));
+  // First check for user-specific template
+  const userSpecificKey = getUserKey(STORAGE_KEYS.WORKOUT_TEMPLATE, user);
+  const template = localStorage.getItem(userSpecificKey);
+  
+  // If no user-specific template exists, check for legacy template
+  if (!template && user === 'puneet') {
+    // Check if there's an old template without user suffix
+    const legacyTemplate = localStorage.getItem(STORAGE_KEYS.WORKOUT_TEMPLATE);
+    if (legacyTemplate) {
+      // Migrate the legacy template to user-specific key
+      localStorage.setItem(userSpecificKey, legacyTemplate);
+      // Remove the old key to avoid confusion
+      localStorage.removeItem(STORAGE_KEYS.WORKOUT_TEMPLATE);
+      return JSON.parse(legacyTemplate);
+    }
+  }
+  
   return template ? JSON.parse(template) : null;
+};
+
+// Helper function to clear a user's template if needed
+export const clearUserTemplate = (user) => {
+  const userSpecificKey = getUserKey(STORAGE_KEYS.WORKOUT_TEMPLATE, user);
+  localStorage.removeItem(userSpecificKey);
 };
 
 export const getWeekNumber = (date) => {

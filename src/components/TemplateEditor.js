@@ -1,8 +1,9 @@
 import React, { useState, useEffect } from 'react';
-import { getDayName, daysOfWeek } from '../data/workoutTemplate';
+import { getDayName, daysOfWeek, getDefaultTemplateForUser } from '../data/workoutTemplate';
+import { clearUserTemplate } from '../utils/localStorage';
 import './TemplateEditor.css';
 
-const TemplateEditor = ({ workoutTemplate, onSave }) => {
+const TemplateEditor = ({ workoutTemplate, onSave, currentUser }) => {
   const [editedTemplate, setEditedTemplate] = useState({});
   const [selectedDay, setSelectedDay] = useState('monday');
   const [saveStatus, setSaveStatus] = useState('');
@@ -46,6 +47,17 @@ const TemplateEditor = ({ workoutTemplate, onSave }) => {
     setEditedTemplate(JSON.parse(JSON.stringify(workoutTemplate)));
     setSaveStatus('Template reset to last saved version');
     setTimeout(() => setSaveStatus(''), 3000);
+  };
+
+  const handleResetToDefault = () => {
+    if (window.confirm(`This will reset your template to the default ${currentUser === 'vinay' ? 'Vinay' : 'Puneet'} workout plan. Are you sure?`)) {
+      clearUserTemplate(currentUser);
+      const defaultTemplate = getDefaultTemplateForUser(currentUser);
+      setEditedTemplate(defaultTemplate);
+      onSave(defaultTemplate);
+      setSaveStatus('Template reset to default!');
+      setTimeout(() => setSaveStatus(''), 3000);
+    }
   };
 
   if (!editedTemplate[selectedDay]) {
@@ -121,6 +133,9 @@ const TemplateEditor = ({ workoutTemplate, onSave }) => {
         </button>
         <button onClick={handleReset} className="reset-button">
           Reset Changes
+        </button>
+        <button onClick={handleResetToDefault} className="default-button">
+          Reset to Default {currentUser === 'vinay' ? 'Vinay' : 'Puneet'} Plan
         </button>
         {saveStatus && (
           <div className="save-status">{saveStatus}</div>
