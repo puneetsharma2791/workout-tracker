@@ -1,0 +1,139 @@
+.workout-display {
+  background: white;
+  border-radius: 10px;
+  padding: 30px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.date-selector {
+  margin-bottom: 20px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.date-selector label {
+  font-weight: bold;
+  color: #333;
+}
+
+.date-selector input[type="date"] {
+  padding: 8px 12px;
+  border: 2px solid #e0e0e0;
+  border-radius: 5px;
+  font-size: 1rem;
+  cursor: pointer;
+}
+
+.workout-display h2 {
+  color: #333;
+  margin-bottom: 20px;
+  font-size: 1.8rem;
+}
+
+.completion-status {
+  background: #4caf50;
+  color: white;
+  padding: 10px 15px;
+  border-radius: 5px;
+  margin-bottom: 20px;
+  display: inline-block;
+}
+
+.workout-table {
+  width: 100%;
+  overflow-x: auto;
+}
+
+.table-header {
+  display: grid;
+  grid-template-columns: 2fr 4fr 1fr;
+  gap: 10px;
+  padding: 15px;
+  background: #f5f5f5;
+  border-radius: 5px 5px 0 0;
+  font-weight: bold;
+  color: #555;
+}
+
+.sets-header {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 10px;
+  text-align: center;
+}
+
+.exercise-row {
+  display: grid;
+  grid-template-columns: 2fr 4fr 1fr;
+  gap: 10px;
+  padding: 15px;
+  border-bottom: 1px solid #e0e0e0;
+  align-items: center;
+}
+
+.exercise-row:hover {
+  background: #f9f9f9;
+}
+
+.exercise-name {
+  font-weight: 500;
+  color: #333;
+}
+
+.sets-data {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 10px;
+}
+
+.set-info {
+  text-align: center;
+  padding: 5px;
+  background: #f0f4ff;
+  border-radius: 5px;
+}
+
+.weight {
+  font-weight: bold;
+  color: #667eea;
+  margin-bottom: 2px;
+}
+
+.reps {
+  color: #666;
+  font-size: 0.9rem;
+}
+
+.empty-set {
+  color: #ccc;
+  text-align: center;
+}
+
+.target-reps {
+  text-align: center;
+  color: #666;
+  font-style: italic;
+}
+
+@media (max-width: 768px) {
+  .workout-display {
+    padding: 20px;
+  }
+  
+  .table-header,
+  .exercise-row {
+    grid-template-columns: 1fr;
+    gap: 15px;
+  }
+  
+  .exercise-name {
+    font-size: 1.1rem;
+    margin-bottom: 10px;
+  }
+  
+  .sets-header,
+  .sets-data {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}

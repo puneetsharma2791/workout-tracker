@@ -1,0 +1,191 @@
+.template-editor {
+  background: white;
+  border-radius: 10px;
+  padding: 30px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.template-editor h2 {
+  color: #333;
+  margin-bottom: 20px;
+  font-size: 1.8rem;
+}
+
+.day-selector {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 30px;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.day-selector button {
+  padding: 8px 16px;
+  border: 2px solid #e0e0e0;
+  background: white;
+  color: #666;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.day-selector button:hover {
+  border-color: #667eea;
+  color: #667eea;
+}
+
+.day-selector button.active {
+  background: #667eea;
+  color: white;
+  border-color: #667eea;
+}
+
+.exercises-editor {
+  margin-bottom: 30px;
+}
+
+.exercises-editor h3 {
+  color: #333;
+  margin-bottom: 20px;
+  font-size: 1.4rem;
+}
+
+.exercise-editor {
+  margin-bottom: 15px;
+}
+
+.exercise-fields {
+  display: grid;
+  grid-template-columns: 3fr 1fr 2fr auto;
+  gap: 10px;
+  align-items: center;
+}
+
+.exercise-name-input,
+.sets-input,
+.reps-input {
+  padding: 10px;
+  border: 2px solid #e0e0e0;
+  border-radius: 5px;
+  font-size: 1rem;
+  transition: border-color 0.3s;
+}
+
+.exercise-name-input:focus,
+.sets-input:focus,
+.reps-input:focus {
+  outline: none;
+  border-color: #667eea;
+}
+
+.remove-button {
+  padding: 10px 15px;
+  background: #f44336;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.remove-button:hover {
+  background: #d32f2f;
+}
+
+.add-exercise-button {
+  padding: 10px 20px;
+  background: #667eea;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 1rem;
+  transition: all 0.3s ease;
+  display: block;
+  margin: 20px auto 0;
+}
+
+.add-exercise-button:hover {
+  background: #5a67d8;
+  transform: translateY(-2px);
+}
+
+.template-actions {
+  display: flex;
+  gap: 15px;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+.save-button,
+.reset-button {
+  padding: 12px 30px;
+  border: none;
+  border-radius: 5px;
+  font-size: 1.1rem;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.save-button {
+  background: #4caf50;
+  color: white;
+}
+
+.save-button:hover {
+  background: #45a049;
+  transform: translateY(-2px);
+}
+
+.reset-button {
+  background: #ff9800;
+  color: white;
+}
+
+.reset-button:hover {
+  background: #f57c00;
+  transform: translateY(-2px);
+}
+
+.save-status {
+  color: #4caf50;
+  font-weight: bold;
+  animation: fadeIn 0.3s ease;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@media (max-width: 768px) {
+  .template-editor {
+    padding: 20px;
+  }
+  
+  .exercise-fields {
+    grid-template-columns: 1fr;
+    gap: 10px;
+  }
+  
+  .day-selector {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  
+  .template-actions {
+    flex-direction: column;
+    width: 100%;
+  }
+  
+  .save-button,
+  .reset-button {
+    width: 100%;
+  }
+}

@@ -1,0 +1,150 @@
+.workout-entry {
+  background: white;
+  border-radius: 10px;
+  padding: 30px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.workout-entry h2 {
+  color: #333;
+  margin-bottom: 20px;
+  font-size: 1.8rem;
+}
+
+.previous-week-notice {
+  background: #e3f2fd;
+  color: #1976d2;
+  padding: 10px 15px;
+  border-radius: 5px;
+  margin-bottom: 20px;
+  font-style: italic;
+}
+
+.entry-form {
+  margin-bottom: 30px;
+}
+
+.exercise-entry {
+  background: #f9f9f9;
+  border-radius: 8px;
+  padding: 20px;
+  margin-bottom: 20px;
+  border: 2px solid #e0e0e0;
+}
+
+.exercise-entry h3 {
+  color: #333;
+  margin-bottom: 10px;
+  font-size: 1.3rem;
+}
+
+.target-reps {
+  color: #666;
+  font-style: italic;
+  margin-bottom: 15px;
+}
+
+.sets-entry {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 15px;
+}
+
+.set-entry {
+  background: white;
+  padding: 15px;
+  border-radius: 5px;
+  border: 1px solid #e0e0e0;
+}
+
+.set-label {
+  font-weight: bold;
+  color: #555;
+  margin-bottom: 10px;
+}
+
+.input-group {
+  display: flex;
+  gap: 10px;
+}
+
+.input-wrapper {
+  flex: 1;
+}
+
+.weight-input,
+.reps-input {
+  width: 100%;
+  padding: 8px;
+  border: 2px solid #e0e0e0;
+  border-radius: 5px;
+  font-size: 1rem;
+  transition: border-color 0.3s;
+}
+
+.weight-input:focus,
+.reps-input:focus {
+  outline: none;
+  border-color: #667eea;
+}
+
+.previous-value {
+  font-size: 0.85rem;
+  color: #888;
+  margin-top: 5px;
+  font-style: italic;
+}
+
+.save-section {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  justify-content: center;
+}
+
+.save-button {
+  padding: 12px 30px;
+  background: #4caf50;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  font-size: 1.1rem;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.save-button:hover {
+  background: #45a049;
+  transform: translateY(-2px);
+}
+
+.save-status {
+  color: #4caf50;
+  font-weight: bold;
+  animation: fadeIn 0.3s ease;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@media (max-width: 768px) {
+  .workout-entry {
+    padding: 20px;
+  }
+  
+  .sets-entry {
+    grid-template-columns: 1fr;
+  }
+  
+  .input-group {
+    flex-direction: column;
+  }
+}
