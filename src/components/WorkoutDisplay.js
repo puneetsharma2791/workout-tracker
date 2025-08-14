@@ -16,7 +16,7 @@ const WorkoutDisplay = ({ workoutTemplate, selectedDay, selectedDate, onDateChan
     return date.toISOString().split('T')[0];
   };
 
-  if (selectedDay === 'sunday') {
+  if (todaysWorkout.length === 0) {
     return (
       <div className="workout-display">
         <div className="date-selector">
@@ -28,7 +28,7 @@ const WorkoutDisplay = ({ workoutTemplate, selectedDay, selectedDate, onDateChan
           />
         </div>
         <h2>Rest Day</h2>
-        <p>No workout scheduled for Sunday. Take a rest!</p>
+        <p>No workout scheduled for {getDayName(selectedDay || '')}. Take a rest!</p>
       </div>
     );
   }
@@ -55,23 +55,23 @@ const WorkoutDisplay = ({ workoutTemplate, selectedDay, selectedDate, onDateChan
       <div className="workout-table">
         <div className="table-header">
           <div className="exercise-name">Exercise</div>
-          <div className="sets-header">
-            <div>Set 1</div>
-            <div>Set 2</div>
-            <div>Set 3</div>
-            <div>Set 4</div>
+          <div className="sets-header" style={{ gridTemplateColumns: `repeat(${Math.max(...todaysWorkout.map(e => e.sets))}, 1fr)` }}>
+            {Array.from({ length: Math.max(...todaysWorkout.map(e => e.sets)) }, (_, i) => (
+              <div key={i}>Set {i + 1}</div>
+            ))}
           </div>
           <div className="target-reps">Target Reps</div>
         </div>
         
         {todaysWorkout.map((exercise, index) => {
           const exerciseData = completedWorkout?.exercises?.find(e => e.name === exercise.name);
+          const maxSets = Math.max(...todaysWorkout.map(e => e.sets));
           
           return (
             <div key={index} className="exercise-row">
               <div className="exercise-name">{exercise.name}</div>
-              <div className="sets-data">
-                {[1, 2, 3, 4].map(setNum => {
+              <div className="sets-data" style={{ gridTemplateColumns: `repeat(${maxSets}, 1fr)` }}>
+                {Array.from({ length: exercise.sets }, (_, i) => i + 1).map(setNum => {
                   const setData = exerciseData?.sets?.find(s => s.setNumber === setNum);
                   return (
                     <div key={setNum} className="set-info">
@@ -86,6 +86,11 @@ const WorkoutDisplay = ({ workoutTemplate, selectedDay, selectedDate, onDateChan
                     </div>
                   );
                 })}
+                {Array.from({ length: maxSets - exercise.sets }, (_, i) => (
+                  <div key={`empty-${i}`} className="set-info">
+                    <div className="na-set">N/A</div>
+                  </div>
+                ))}
               </div>
               <div className="target-reps">{exercise.targetReps}</div>
             </div>

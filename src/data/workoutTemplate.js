@@ -1,4 +1,4 @@
-export const defaultWorkoutTemplate = {
+export const puneetWorkoutTemplate = {
   monday: [
     { name: "Lat pull down - close grip", sets: 4, targetReps: "10-12" },
     { name: "Upper pec flyes - cable", sets: 4, targetReps: "15" },
@@ -47,7 +47,64 @@ export const defaultWorkoutTemplate = {
   ]
 };
 
-export const daysOfWeek = ['monday', 'tuesday', 'wednesday', 'thursday', 'friday', 'saturday'];
+export const vinayWorkoutTemplate = {
+  monday: [], // Rest day
+  tuesday: [
+    // Lower Body (Workout A)
+    { name: "Goblet Squats", sets: 3, targetReps: "12" },
+    { name: "Walking Lunges", sets: 3, targetReps: "10 each leg" },
+    { name: "Romanian Deadlifts", sets: 3, targetReps: "12" },
+    { name: "Step-ups (low platform)", sets: 3, targetReps: "10 each leg" },
+    { name: "Standing Calf Raises", sets: 3, targetReps: "15" }
+  ],
+  wednesday: [
+    // Cardio
+    { name: "Treadmill Intervals (2 min jog + 1 min walk)", sets: 1, targetReps: "10 rounds" },
+    { name: "OR Stationary Bike Intervals (1 min fast/1 min slow)", sets: 1, targetReps: "10 rounds" },
+    { name: "OR Rowing Machine (500m row + 1 min rest)", sets: 1, targetReps: "6 rounds" }
+  ],
+  thursday: [
+    // Upper Body
+    { name: "Dumbbell Chest Press", sets: 3, targetReps: "10" },
+    { name: "Lat Pulldown", sets: 3, targetReps: "12" },
+    { name: "Dumbbell Shoulder Press", sets: 3, targetReps: "10" },
+    { name: "Seated Cable Row", sets: 3, targetReps: "12" },
+    { name: "Bicep Curls", sets: 3, targetReps: "12" },
+    { name: "Tricep Rope Pushdown", sets: 3, targetReps: "12" }
+  ],
+  friday: [
+    // Cardio
+    { name: "Treadmill Incline Walk", sets: 1, targetReps: "30 mins" },
+    { name: "OR Elliptical", sets: 1, targetReps: "25 mins" },
+    { name: "OR Outdoor Brisk Walk", sets: 1, targetReps: "40 mins" }
+  ],
+  saturday: [
+    // Lower Body (Workout B - Machines)
+    { name: "Leg Press Machine", sets: 3, targetReps: "12" },
+    { name: "Leg Curl Machine", sets: 3, targetReps: "12" },
+    { name: "Leg Extension Machine", sets: 3, targetReps: "12" },
+    { name: "Glute Kickback Machine", sets: 3, targetReps: "12 each leg" },
+    { name: "Standing Calf Raises", sets: 3, targetReps: "15" }
+  ],
+  sunday: [
+    // Upper Body (Different Focus)
+    { name: "Incline Dumbbell Press", sets: 3, targetReps: "10" },
+    { name: "Cable Lat Row", sets: 3, targetReps: "12" },
+    { name: "Arnold Press", sets: 3, targetReps: "10" },
+    { name: "Rear Delt Fly", sets: 3, targetReps: "12" },
+    { name: "Hammer Curls", sets: 3, targetReps: "12" },
+    { name: "Overhead Tricep Extension", sets: 3, targetReps: "12" }
+  ]
+};
+
+export const getDefaultTemplateForUser = (user) => {
+  if (user === 'vinay') {
+    return vinayWorkoutTemplate;
+  }
+  return puneetWorkoutTemplate;
+};
+
+export const daysOfWeek = ['monday', 'tuesday', 'wednesday', 'thursday', 'friday', 'saturday', 'sunday'];
 
 export const getDayName = (day) => {
   return day.charAt(0).toUpperCase() + day.slice(1);

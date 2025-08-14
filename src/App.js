@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import './App.css';
-import { defaultWorkoutTemplate } from './data/workoutTemplate';
+import { getDefaultTemplateForUser } from './data/workoutTemplate';
 import { getWorkoutTemplate, saveWorkoutTemplate, getWeekNumber } from './utils/localStorage';
 import WorkoutDisplay from './components/WorkoutDisplay';
 import WorkoutEntry from './components/WorkoutEntry';
@@ -30,8 +30,9 @@ function App() {
     if (savedTemplate) {
       setWorkoutTemplate(savedTemplate);
     } else {
-      setWorkoutTemplate(defaultWorkoutTemplate);
-      saveWorkoutTemplate(defaultWorkoutTemplate, user);
+      const defaultTemplate = getDefaultTemplateForUser(user);
+      setWorkoutTemplate(defaultTemplate);
+      saveWorkoutTemplate(defaultTemplate, user);
     }
 
     const today = new Date();

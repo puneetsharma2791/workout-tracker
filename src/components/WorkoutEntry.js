@@ -18,16 +18,17 @@ const WorkoutEntry = ({ workoutTemplate, selectedDay, selectedDate, onDateChange
       if (existingWorkout) {
         setWorkoutData(existingWorkout.exercises || []);
       } else {
-        const initialData = workoutTemplate[selectedDay].map(exercise => ({
-          name: exercise.name,
-          targetReps: exercise.targetReps,
-          sets: [
-            { setNumber: 1, weight: '', reps: '' },
-            { setNumber: 2, weight: '', reps: '' },
-            { setNumber: 3, weight: '', reps: '' },
-            { setNumber: 4, weight: '', reps: '' }
-          ]
-        }));
+        const initialData = workoutTemplate[selectedDay].map(exercise => {
+          const setsArray = [];
+          for (let i = 1; i <= exercise.sets; i++) {
+            setsArray.push({ setNumber: i, weight: '', reps: '' });
+          }
+          return {
+            name: exercise.name,
+            targetReps: exercise.targetReps,
+            sets: setsArray
+          };
+        });
         setWorkoutData(initialData);
       }
     }
@@ -64,7 +65,7 @@ const WorkoutEntry = ({ workoutTemplate, selectedDay, selectedDate, onDateChange
     return set ? set[field] : null;
   };
 
-  if (selectedDay === 'sunday') {
+  if (selectedDay && workoutTemplate[selectedDay] && workoutTemplate[selectedDay].length === 0) {
     return (
       <div className="workout-entry">
         <div className="date-selector">
@@ -76,7 +77,7 @@ const WorkoutEntry = ({ workoutTemplate, selectedDay, selectedDate, onDateChange
           />
         </div>
         <h2>Rest Day</h2>
-        <p>No workout scheduled for Sunday. Take a rest!</p>
+        <p>No workout scheduled for {getDayName(selectedDay || '')}. Take a rest!</p>
       </div>
     );
   }

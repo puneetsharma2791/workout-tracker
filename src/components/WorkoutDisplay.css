@@ -110,6 +110,13 @@
   text-align: center;
 }
 
+.na-set {
+  color: #e0e0e0;
+  text-align: center;
+  font-style: italic;
+  font-size: 0.9rem;
+}
+
 .target-reps {
   text-align: center;
   color: #666;
